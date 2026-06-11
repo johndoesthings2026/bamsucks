@@ -1,12 +1,12 @@
 @echo off
-title BAM Sucks - raw recovered crawl (localhost:8081)
+title BAM Sucks - raw site files (localhost:8081)
 cd /d "%~dp0recovered_site"
 echo.
 echo ================================================
-echo  BAM Sucks - RAW RECOVERED CRAWL (comparison)
+echo  BAM Sucks - RAW SITE FILES (comparison)
 echo ================================================
 echo.
-echo This is the "recovered_site" raw crawl folder.
+echo This is the raw site files folder.
 echo Use this to compare against the editable source.
 echo.
 echo Open in your browser:

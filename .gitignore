@@ -6,3 +6,13 @@ __pycache__/
 *.log
 .DS_Store
 Thumbs.db
+
+# Recovery / local-only artifacts (do not deploy to CF)
+cloudflare_metadata/
+current-site-source/
+historical-homepages/
+recovered_site/
+*.bat
+_build_topic_pages.py
+add_document.py
+generate_new_previews.py

@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Bricks and Minifigs Sucks</title>
+  <meta name="description" content="Contact page with a browser proof-of-work gate.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://bamsucks.com/contact/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="stylesheet" href="/static/pow-bot-deterrent.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #111;
+      --muted: #555;
+      --line: #b9b9b9;
+      --link: #153e75;
+      --success: #088000;
+      --danger: #e00000;
+      --soft: #f7f7f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #fbf8f8;
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.25;
+      padding: 28px 16px;
+    }
+
+    main {
+      width: min(100%, 760px);
+      margin: 0 auto;
+    }
+
+    .gate-card {
+      background: #fff;
+      border-top: 1px solid #aaa;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+      padding: 0 38px 28px;
+      text-align: left;
+    }
+
+    h1 {
+      margin: 0 0 30px;
+      padding-top: 30px;
+      font-size: 2.35rem;
+      line-height: 1.25;
+      font-weight: 700;
+      max-width: 680px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: flex-start;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    button {
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      background: #efefef;
+      color: #111;
+      font: 13px/1.2 Arial, Helvetica, sans-serif;
+      padding: 3px 8px;
+      cursor: pointer;
+    }
+
+    button:hover:not(:disabled) {
+      background: #e2e2e2;
+    }
+
+    button:disabled {
+      color: #9a9a9a;
+      background: #eee;
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .pow-table {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      column-gap: 13px;
+      row-gap: 4px;
+      align-items: center;
+      margin-top: 2px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    .pow-label {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .pow-value {
+      min-width: 0;
+    }
+
+    .status-stopped {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .status-running,
+    .status-complete {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .status-error {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .mono-field {
+      width: min(100%, 338px);
+      border: 1px solid #aaa;
+      border-radius: 0;
+      padding: 2px 5px;
+      font: 13px/1.2 Arial, Helvetica, sans-serif;
+      color: #111;
+      background: #fff;
+    }
+
+    .mono-field[readonly] {
+      background: #fff;
+    }
+
+    .challenge-text {
+      display: inline-block;
+      max-width: 100%;
+      font: 13px/1.2 Arial, Helvetica, sans-serif;
+      overflow-wrap: anywhere;
+    }
+
+    .email-locked {
+      color: var(--muted);
+    }
+
+    .auto-row {
+      margin-top: 7px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+    }
+
+    .auto-row input {
+      width: 13px;
+      height: 13px;
+      vertical-align: -1px;
+    }
+
+    .unblock-row {
+      margin-top: 5px;
+    }
+
+    .work-readout {
+      grid-column: 1 / -1;
+      display: none;
+      margin: 6px 0 2px;
+      padding: 7px 8px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      color: #333;
+      font: 12px/1.35 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+    }
+
+    .work-readout.is-visible {
+      display: block;
+    }
+
+    .disclaimer {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 500px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .disclaimer a {
+      font-weight: 700;
+    }
+
+    .pow-holder {
+      height: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-align: left;
+      pointer-events: none;
+      position: absolute;
+      left: -9999px;
+    }
+
+    .pow-holder:empty {
+      display: none;
+    }
+
+    .reveal {
+      display: none;
+      margin-top: 10px;
+      font: 14px/1.35 Arial, Helvetica, sans-serif;
+    }
+
+    .reveal.is-visible {
+      display: block;
+    }
+
+    .reveal p {
+      margin: 0 0 8px;
+    }
+
+    a {
+      color: var(--link);
+      text-underline-offset: 2px;
+    }
+
+    .back-link {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding-top: 22px;
+      }
+
+      .gate-card {
+        padding: 22px 18px;
+      }
+
+      h1 {
+        font-size: 1.85rem;
+      }
+
+      .pow-table {
+        grid-template-columns: max-content minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="gate-card" aria-labelledby="contact-gate-title">
+      <h1 id="contact-gate-title">Complete proof-of-work to reveal my email</h1>
+
+      <form id="pow-form" action="#" onsubmit="return false;">
+        <div class="controls">
+          <button id="start-mining" type="button">Start Check</button>
+          <button id="stop-mining" type="button" disabled>Stop Check</button>
+        </div>
+
+        <div class="pow-table" aria-live="polite">
+          <div class="pow-label">Status:</div>
+          <div class="pow-value"><span id="pow-status" class="status-stopped">Stopped</span></div>
+
+          <div class="pow-label">E-mail:</div>
+          <div class="pow-value" id="email-row"><span class="email-locked">locked until proof completes</span></div>
+
+          <div class="pow-label">Challenge:</div>
+          <div class="pow-value"><span id="challenge-text" class="challenge-text">Not generated yet</span></div>
+
+          <div class="pow-label">Proof:</div>
+          <div class="pow-value"><input id="solution-field" class="mono-field" type="text" readonly placeholder="waiting for proof nonce"></div>
+
+          <div id="work-readout" class="work-readout">Waiting for CPU work.</div>
+        </div>
+
+        <label class="auto-row">
+          <input id="auto-submit" type="checkbox">
+          Reveal automatically after proof completes
+        </label>
+
+        <div class="unblock-row">
+          <button id="unblock-button" type="button" disabled>Reveal Email</button>
+        </div>
+
+        <p class="disclaimer">This runs a real <a href="https://en.wikipedia.org/wiki/Proof_of_work" target="_blank" rel="noopener noreferrer">proof-of-work (POW)</a> check in your browser to stop bots from scraping my email. Just press start to begin the POW, to get my email-address. It may take a while.</p>
+        <div id="pow-container" class="pow-holder" aria-live="polite"></div>
+      </form>
+
+      <div id="revealed-contact" class="reveal" aria-live="polite"></div>
+    </section>
+
+    <p class="back-link"><a href="/">Back to archive</a></p>
+  </main>
+
+  <script>
+    // Paste the real contact address here as character codes if you change it.
+    // It is not inserted into the DOM until the PoW callback succeeds.
+    const CONTACT_EMAIL_BYTES = [108, 117, 108, 117, 99, 97, 110, 116, 64, 99, 111, 99, 107, 46, 108, 105];
+
+    // Intentionally hard bot-deterrence setting. Each +1 roughly doubles average solve time.
+    // Lower this if real humans report the page is taking too long or cooking laptops.
+    const POW_DIFFICULTY_LEVEL = 22;
+
+    // Library default is 4096. 8192 makes each Scrypt attempt heavier.
+    const POW_BOT_DETERRENT_SCRYPT_CPU_AND_MEMORY_COST = 8192;
+
+    const powStatus = document.getElementById("pow-status");
+    const startMiningButton = document.getElementById("start-mining");
+    const stopMiningButton = document.getElementById("stop-mining");
+    const unblockButton = document.getElementById("unblock-button");
+    const autoSubmit = document.getElementById("auto-submit");
+    const emailRow = document.getElementById("email-row");
+    const challengeText = document.getElementById("challenge-text");
+    const solutionField = document.getElementById("solution-field");
+    const workReadout = document.getElementById("work-readout");
+    const powContainer = document.getElementById("pow-container");
+    const revealedContact = document.getElementById("revealed-contact");
+    const lockedEmailHTML = '<span class="email-locked">locked until proof completes</span>';
+    // const proofMessages = [ ... all cringy messages removed ... ];
+    // const extraProofMessages = [ ... all cringy messages removed ... ];
+    // const extraProofMessagesMore = [ ... all cringy messages removed ... ];
+    let miningStarted = false;
+    let progressTimer = 0;
+    let latestProofStats = "workers initializing";
+    let proofComplete = false;
+
+    window.contactPowComplete = (nonce) => {
+      proofComplete = true;
+      clearInterval(progressTimer);
+      solutionField.value = nonce || "";
+      powStatus.textContent = "Complete";
+      powStatus.className = "status-complete";
+      startMiningButton.disabled = true;
+      stopMiningButton.disabled = true;
+      unblockButton.disabled = false;
+      workReadout.classList.add("is-visible");
+      updateWorkReadout("Solution found. CPU proof-of-work complete.");
+      emailRow.textContent = "ready - click reveal";
+
+      if (autoSubmit.checked) {
+        revealContact();
+      }
+    };
+
+    unblockButton.addEventListener("click", () => {
+      if (proofComplete) {
+        revealContact();
+      }
+    });
+
+    startMiningButton.addEventListener("click", () => {
+      if (miningStarted) {
+        return;
+      }
+
+      miningStarted = true;
+      powStatus.textContent = "Running";
+      powStatus.className = "status-running";
+      startMiningButton.disabled = true;
+      stopMiningButton.disabled = false;
+      unblockButton.disabled = true;
+      solutionField.value = "";
+      revealedContact.classList.remove("is-visible");
+      revealedContact.replaceChildren();
+      emailRow.innerHTML = lockedEmailHTML;
+      proofComplete = false;
+      workReadout.classList.add("is-visible");
+      updateWorkReadout("Starting browser proof-of-work workers and loading Scrypt WASM...");
+
+      powContainer.dataset.powBotDeterrentStaticAssetsPath = "static";
+      const challenge = makeChallenge(POW_DIFFICULTY_LEVEL);
+      powContainer.dataset.powBotDeterrentChallenge = challenge.encoded;
+      powContainer.dataset.powBotDeterrentCallback = "contactPowComplete";
+      challengeText.textContent = challenge.display;
+
+      try {
+        awaitPowLibraryReady()
+          .then(() => {
+            if (!window.powBotDeterrentInitDone) {
+              window.powBotDeterrentInit();
+            }
+            window.powBotDeterrentTrigger();
+            pollLibraryProgress();
+            updateTechnicalProgress();
+            progressTimer = setInterval(() => {
+              pollLibraryProgress();
+              updateTechnicalProgress();
+            }, 1000);
+          })
+          .catch(err => {
+            miningStarted = false;
+            startMiningButton.disabled = false;
+            stopMiningButton.disabled = true;
+            powStatus.textContent = "Error";
+            powStatus.className = "status-error";
+            updateWorkReadout(`Could not start proof-of-work: ${err.message}`);
+          });
+      } catch (err) {
+        miningStarted = false;
+        startMiningButton.disabled = false;
+        stopMiningButton.disabled = true;
+        powStatus.textContent = "Error";
+        powStatus.className = "status-error";
+        updateWorkReadout(`Could not start proof-of-work: ${err.message}`);
+      }
+    });
+
+    stopMiningButton.addEventListener("click", () => {
+      clearInterval(progressTimer);
+      if (window.powBotDeterrentReset) {
+        window.powBotDeterrentReset();
+      }
+      miningStarted = false;
+      startMiningButton.disabled = false;
+      stopMiningButton.disabled = true;
+      unblockButton.disabled = true;
+      proofComplete = false;
+      powStatus.textContent = "Stopped";
+      powStatus.className = "status-stopped";
+      solutionField.value = "";
+      emailRow.innerHTML = lockedEmailHTML;
+      revealedContact.classList.remove("is-visible");
+      revealedContact.replaceChildren();
+      powContainer.replaceChildren();
+      delete powContainer.dataset.powBotDeterrentChallenge;
+      delete powContainer.dataset.powBotDeterrentCallback;
+      updateWorkReadout("Stopped. No solution found.");
+    });
+
+    function awaitPowLibraryReady() {
+      if (window.powBotDeterrentInit && window.powBotDeterrentTrigger) {
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[src^="/static/pow-bot-deterrent.js"]');
+        if (existing) {
+          existing.remove();
+        }
+
+        const script = document.createElement("script");
+        const timeout = setTimeout(() => {
+          reject(new Error("proof-of-work library did not load"));
+        }, 12000);
+
+        script.addEventListener("load", () => {
+          clearTimeout(timeout);
+          if (window.powBotDeterrentInit && window.powBotDeterrentTrigger) {
+            resolve();
+          } else {
+            reject(new Error("proof-of-work library loaded but did not initialize"));
+          }
+        }, { once: true });
+
+        script.addEventListener("error", () => {
+          clearTimeout(timeout);
+          reject(new Error("could not fetch /static/pow-bot-deterrent.js"));
+        }, { once: true });
+
+        script.src = `/static/pow-bot-deterrent.js?v=${Date.now()}`;
+        document.body.appendChild(script);
+      });
+    }
+
+    function makeChallenge(difficultyLevel) {
+      const preimage = new Uint8Array(16);
+      crypto.getRandomValues(preimage);
+      const saltHex = Array.from(preimage.slice(0, 6), byte => byte.toString(16).padStart(2, "0")).join("");
+      const issuedAt = Date.now().toString(36).toUpperCase();
+
+      const challenge = {
+        i: bytesToBase64(preimage),
+        d: makeDifficultyHex(difficultyLevel),
+        dl: difficultyLevel,
+        N: POW_BOT_DETERRENT_SCRYPT_CPU_AND_MEMORY_COST,
+        r: 8,
+        p: 1,
+        klen: 16
+      };
+
+      return {
+        encoded: btoa(JSON.stringify(challenge)),
+        display: `POW:${issuedAt}:SALT${saltHex}:D${difficultyLevel}`
+      };
+    }
+
+    function pollLibraryProgress() {
+      const bestHashElement = powContainer.querySelector(".pow-bot-deterrent-best-hash");
+      const progressElement = powContainer.querySelector(".pow-bot-deterrent-progress-bar");
+      const width = progressElement ? progressElement.style.width || "0%" : "0%";
+      if (!bestHashElement) {
+        latestProofStats = "workers warming up";
+        return;
+      }
+      latestProofStats = `${bestHashElement.textContent.trim()} | estimated progress ${width}`;
+    }
+
+    function updateWorkReadout(text) {
+      workReadout.textContent = text;
+    }
+
+    function updateTechnicalProgress() {
+      const bestHashElement = powContainer.querySelector(".pow-bot-deterrent-best-hash");
+      const progressElement = powContainer.querySelector(".pow-bot-deterrent-progress-bar");
+      let stats = latestProofStats || "workers initializing";
+      if (bestHashElement) {
+        stats = bestHashElement.textContent.trim();
+      }
+      if (progressElement) {
+        const width = progressElement.style.width || "0%";
+        stats += ` | estimated progress ${width}`;
+      }
+      const challengeInfo = challengeText.textContent || "";
+      updateWorkReadout(`Solving Scrypt proof-of-work challenge\n${challengeInfo}\n${stats}\nParams: difficulty=${POW_DIFFICULTY_LEVEL} bits, N=${POW_BOT_DETERRENT_SCRYPT_CPU_AND_MEMORY_COST}, r=8, p=1, klen=16`);
+    }
+
+    function revealContact() {
+      const address = decodeContactEmail();
+      const mailLink = document.createElement("a");
+      mailLink.href = `mailto:${address}`;
+      mailLink.textContent = address;
+
+      emailRow.replaceChildren(mailLink.cloneNode(true));
+      revealedContact.replaceChildren();
+
+      const line = document.createElement("p");
+      line.textContent = "Proof complete - you can now contact me at: ";
+      line.appendChild(mailLink);
+      revealedContact.appendChild(line);
+
+      const note = document.createElement("p");
+      note.className = "disclaimer";
+      note.textContent = "Proof-of-work complete. The check ran locally in your browser.";
+      revealedContact.appendChild(note);
+      revealedContact.classList.add("is-visible");
+      revealedContact.scrollIntoView({ block: "nearest" });
+    }
+
+    function decodeContactEmail() {
+      return String.fromCharCode(...CONTACT_EMAIL_BYTES);
+    }
+
+    function makeDifficultyHex(difficultyLevel) {
+      const bytes = new Uint8Array(Math.ceil(difficultyLevel / 8));
+
+      for (let j = 0; j < bytes.length; j++) {
+        let difficultyByte = 0;
+        for (let k = 0; k < 8; k++) {
+          const currentBitIndex = (j * 8) + (7 - k);
+          if (currentBitIndex + 1 > difficultyLevel) {
+            difficultyByte = difficultyByte | (1 << k);
+          }
+        }
+        bytes[j] = difficultyByte;
+      }
+
+      return Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+    }
+
+    function bytesToBase64(bytes) {
+      let binary = "";
+      bytes.forEach(byte => {
+        binary += String.fromCharCode(byte);
+      });
+      return btoa(binary);
+    }
+  </script>
+  <script src="/static/pow-bot-deterrent.js"></script>
+</body>
+</html>

@@ -1,17 +1,15 @@
 @echo off
-title BAM Sucks - current editable source (localhost:8080)
-cd /d "%~dp0current-site-source"
+title BAM Sucks - current source (full site with readers + topics) (localhost:8080)
+cd /d "%~dp0"
 echo.
 echo ================================================
-echo  BAM Sucks - RECOVERED CURRENT EDITABLE SOURCE
+echo  BAM Sucks - current source (localhost:8080)
 echo ================================================
-echo.
-echo This is the "current editable static source" folder.
-echo (The one the README calls the editable version.)
 echo.
 echo Open in your browser:
 echo   http://localhost:8080
 echo.
+echo This now includes the root catalog + all /slug/ reader pages + /topics/ hubs.
 echo The server is now running in this window.
 echo Access logs will appear here.
 echo Press Ctrl+C to stop, then close the window.
