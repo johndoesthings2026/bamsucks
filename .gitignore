@@ -1,0 +1,8 @@
+﻿# Ignore Python caches and Cloudflare wrangler temp
+__pycache__/
+*.py[cod]
+*$py.class
+.wrangler/
+*.log
+.DS_Store
+Thumbs.db

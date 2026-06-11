@@ -1,0 +1,25 @@
+﻿{
+  "name": "Bricks & Minifigs Dispute Archive",
+  "short_name": "Bricks & Minifigs Dispute",
+  "description": "Chronological archive for the Bricks & Minifigs dispute involving Bricks & Minifigs, the Mansell LEGO collection, Reckless Ben, Chrystal Law, and Utah Case No. 260402353.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4efe4",
+  "theme_color": "#f4efe4",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
+
+
