@@ -72,34 +72,6 @@
       text-align: center;
       flex-shrink: 0;
     }
-    .thumb-preview {
-      width: 36px;
-      height: 28px;
-      background: #fff;
-      border: 1px solid #666;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .thumb-preview::before {
-      content: '';
-      position: absolute;
-      top: 2px; left: 2px; right: 2px;
-      height: 4px;
-      background: #1e90ff;
-    }
-    .thumb-preview::after {
-      content: '';
-      position: absolute;
-      top: 8px; left: 2px; right: 2px; bottom: 2px;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent,
-        transparent 3px,
-        #ccc 3px,
-        #ccc 4px
-      );
-    }
     .thumb-label {
       flex: 1;
       white-space: nowrap;
@@ -158,11 +130,13 @@
     .viewer-content {
       flex: 1;
       background: #f8f8f8;
-      min-height: 500px;
+      min-height: 600px;
+      overflow: auto;
+      position: relative;
     }
     .viewer-content iframe {
       width: 100%;
-      height: 100%;
+      min-height: 800px;
       border: 0;
       display: block;
       background: #fff;
@@ -215,8 +189,8 @@
 <body>
   <main>
     <header>
-      <h1>Bricks and Minifigs POS data</h1>
-      <p class="lede">Independent analysis merging Bricks &amp; Minifigs (BAM) point-of-sale records with Bryan Mansell’s inventory lists for the Salem/Keizer store. Multiple sheets covering sold sets, unsold inventory, layaways, private sales, storage/home labels, and raw extracts.</p>
+      <h1>Exhibit B - Independent BAM POS Bryan Sets Reconcile</h1>
+      <p class="lede">Utah Case No. 260402353: Independent multi-sheet HTML workbook reconciling BAM point-of-sale records with Bryan Mansell’s inventory lists for the Salem/Keizer store (sold/unsold, layaways, Nov 2025 private sales, storage vs home labels, raw data).</p>
       <nav class="top-links" aria-label="Document navigation">
         <a href="/exhibit-b-independent-bam-pos/FULL Merger of Inventory and POS.html" target="_blank" rel="noopener noreferrer">Open full screen</a>
         <a href="/exhibit-b-independent-bam-pos-reconcile.zip" download>Download ZIP (all 13 sheets)</a>
@@ -231,7 +205,7 @@
         <div class="viewer-header">
           <span class="title" id="viewer-title">Bricks and Minifigs POS data</span>
           <div class="controls">
-            <span id="sheet-indicator">1 / 13</span>
+            <span id="sheet-indicator">1 / 7</span>
             <button onclick="goFullScreen()" title="Go full screen">⛶</button>
             <a href="/exhibit-b-independent-bam-pos-reconcile.zip" download title="Download ZIP">⬇ ZIP</a>
           </div>
@@ -255,7 +229,7 @@
           <div class="fact"><span>Date</span>2026 (analysis of 2023–2026 data)</div>
           <div class="fact"><span>Source</span>Independent reconciliation of BAM POS records + Bryan Mansell inventory lists</div>
           <div class="fact"><span>People / entities</span>Bryan Mansell (Reckless Ben), BAM Franchising, Inc. / Bricks &amp; Minifigs</div>
-          <div class="fact"><span>Sheets</span>13 (FULL Merger, Sold in POS, Unsold, Layaways, Private Sale, Storage/Home, Raw Data, etc.)</div>
+          <div class="fact"><span>Sheets</span>7 (FULL Merger of Inventory and POS, POS Raw Data, Sold in POS, Unsold, Sold in Inventory Not in POS, Outstanding Layaways, Unknown Layaway Minifig or Set POS)</div>
           <div class="fact"><span>Original file</span>Exhibit B - Independent - BAM POS Bryan Sets Reconcile.zip</div>
         </div>
         <details>
@@ -279,17 +253,11 @@
     const sheets = [
       {num: "01", label: "FULL Merger of Inventory and POS", src: "/exhibit-b-independent-bam-pos/FULL Merger of Inventory and POS.html"},
       {num: "02", label: "POS Raw Data", src: "/exhibit-b-independent-bam-pos/POS Raw Data.html"},
-      {num: "03", label: "Inventory Sets Raw", src: "/exhibit-b-independent-bam-pos/Inventory Sets Raw.html"},
-      {num: "04", label: "Sold in POS", src: "/exhibit-b-independent-bam-pos/Sold in POS.html"},
-      {num: "05", label: "Unsold", src: "/exhibit-b-independent-bam-pos/Unsold.html"},
-      {num: "06", label: "Sets Labeled Storage on Bryan's List", src: "/exhibit-b-independent-bam-pos/Sets Labeled _Storage_ on Bryans List.html"},
-      {num: "07", label: "November 2025 Private Sale", src: "/exhibit-b-independent-bam-pos/November 2025 Private Sale.html"},
-      {num: "08", label: "Sets Labeled Home on Bryan's List", src: "/exhibit-b-independent-bam-pos/Sets Labeled _Home_ on Bryans List.html"},
-      {num: "09", label: "Outstanding Layaways", src: "/exhibit-b-independent-bam-pos/Outstanding Layaways.html"},
-      {num: "10", label: "Unknown Layaway Minifig or Set POS", src: "/exhibit-b-independent-bam-pos/Unknown Layaway, Minifig or Set POS.html"},
-      {num: "11", label: "Sets Labeled Storage SOLD", src: "/exhibit-b-independent-bam-pos/Sets Labeled _Storage_ on Bryans List - SOLD.html"},
-      {num: "12", label: "Sold on Inventory Not in POS", src: "/exhibit-b-independent-bam-pos/Sold on Inventory - Not in POS.html"},
-      {num: "13", label: "POS Sets not in Bryan's List", src: "/exhibit-b-independent-bam-pos/POS Sets not in Bryans List.html"}
+      {num: "03", label: "Sold in POS", src: "/exhibit-b-independent-bam-pos/Sold in POS.html"},
+      {num: "04", label: "Unsold", src: "/exhibit-b-independent-bam-pos/Unsold.html"},
+      {num: "05", label: "Sold in Inventory Not in POS", src: "/exhibit-b-independent-bam-pos/Sold in Inventory Not in POS.html"},
+      {num: "06", label: "Outstanding Layaways", src: "/exhibit-b-independent-bam-pos/Outstanding Layaways.html"},
+      {num: "07", label: "Unknown Layaway, Minifig or Set POS", src: "/exhibit-b-independent-bam-pos/Unknown Layaway, Minifig or Set POS.html"}
     ];
 
     const listEl = document.getElementById('thumb-list');
@@ -303,7 +271,7 @@
       sheets.forEach((s, i) => {
         const d = document.createElement('div');
         d.className = 'thumb' + (i === 0 ? ' active' : '');
-        d.innerHTML = `<div class="thumb-preview"></div><div class="thumb-num">${s.num}</div><div class="thumb-label">${s.label}</div>`;
+        d.innerHTML = `<div class="thumb-num">${s.num}</div><div class="thumb-label">${s.label}</div>`;
         d.onclick = () => switchTo(i);
         listEl.appendChild(d);
       });
@@ -316,6 +284,23 @@
       titleEl.textContent = s.label + '.html';
       indicator.textContent = `${s.num} / ${sheets.length}`;
       document.querySelectorAll('#thumb-list .thumb').forEach((el, idx) => el.classList.toggle('active', idx === i));
+      resizeViewer();
+    }
+
+    function resizeViewer() {
+      const iframe = document.getElementById('viewer');
+      if (!iframe) return;
+      iframe.onload = function() {
+        try {
+          const idoc = iframe.contentDocument || iframe.contentWindow.document;
+          if (idoc && idoc.body) {
+            const contentH = Math.max(idoc.body.scrollHeight || 0, 800);
+            iframe.style.height = contentH + 'px';
+          }
+        } catch (e) {
+          iframe.style.height = '800px';
+        }
+      };
     }
 
     function goFullScreen() {
