@@ -528,6 +528,7 @@
           {num: "6G", slug: "bricks-minifigs-v-reckless-ben-order-alternative-service", title: "Bricks and Minifigs Ex Parte Order"},
           {num: "6H", slug: "bricks-minifigs-v-reckless-ben-exhibit-a-consignment-agreement", title: "Exhibit A - Consignment Agreement"},
           {num: "6I", slug: "bricks-minifigs-v-reckless-ben-exhibit-b-sold-sets-mansell-investigation", title: "Exhibit B - Sold Sets / POS Data"},
+          {num: "6I-IND", slug: "bricks-minifigs-v-reckless-ben-exhibit-b-independent-bam-pos-reconcile", title: "Exhibit B - Independent BAM POS / Inventory Reconciliation"},
           {num: "6J", slug: "bricks-minifigs-v-reckless-ben-exhibit-g-community-note-salem-store", title: "Exhibit G - Community Note"},
           {num: "6K", slug: "bricks-minifigs-v-reckless-ben-exhibit-i-incident-log", title: "Exhibit I - Incident Log"},
           {num: "6L", slug: "bricks-minifigs-v-reckless-ben-exhibit-j-notice-trespass", title: "Exhibit J - Notice of Trespass"},

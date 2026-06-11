@@ -67,153 +67,8 @@ READER_TEMPLATE = """<!doctype html>
   <meta name="twitter:title" content="{og_title}">
   <meta name="twitter:description" content="{description}">
   <meta name="twitter:image" content="/previews/{slug}-page-1.png">
+  <link rel="stylesheet" href="/document.css">
   <script src="/archive.js?v=pattern26" defer></script>
-  <style>
-    :root {{
-      color-scheme: light;
-      --ink: #1c1c1c;
-      --muted: #555;
-      --line: #d7d7d7;
-      --link: #153e75;
-      --link-hover: #0f2d55;
-      --bg-soft: #f8f8f8;
-      --max: 1280px;
-    }}
-    * {{ box-sizing: border-box; }}
-    body {{
-      margin: 0;
-      background: #fff;
-      color: var(--ink);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.55;
-      overflow-x: hidden;
-      position: relative;
-    }}
-    main {{
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-      padding: 20px 0 32px;
-      position: relative;
-      z-index: 1;
-    }}
-    h1, h2 {{ line-height: 1.15; margin: 0; }}
-    h1 {{ font-size: 1.85rem; margin-bottom: 6px; }}
-    h2 {{
-      font-size: 1.05rem;
-      margin: 0 0 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--line);
-    }}
-    p {{ margin: 0 0 14px; }}
-    a {{ color: var(--link); text-underline-offset: 2px; }}
-    a:hover, a:focus {{ color: var(--link-hover); }}
-    .lede {{ max-width: 920px; color: var(--muted); font-size: 1rem; }}
-    .top-links {{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin: 12px 0 18px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line);
-      font-weight: 700;
-    }}
-    .reader {{
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 330px;
-      gap: 18px;
-      align-items: start;
-    }}
-    .pdf-pane,
-    .side {{
-      border: 1px solid var(--line);
-      background: #fff;
-    }}
-    .side {{
-      padding: 14px;
-      position: sticky;
-      top: 14px;
-    }}
-    .doc-preview {{
-      display: block;
-      width: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      margin: 0 0 12px;
-      border: 1px solid var(--line);
-      background: var(--bg-soft);
-    }}
-    .facts {{
-      display: grid;
-      gap: 8px;
-      margin: 12px 0 0;
-    }}
-    .fact {{
-      border: 1px solid var(--line);
-      padding: 9px;
-      background: #fff;
-    }}
-    .fact span {{
-      display: block;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 3px;
-    }}
-    .viewer {{
-      width: 100%;
-      height: calc(100vh - 150px);
-      min-height: 700px;
-      border: 0;
-      background: var(--bg-soft);
-      display: block;
-    }}
-    .actions {{
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin: 14px 0;
-      font-weight: 700;
-    }}
-    .actions a {{
-      border: 1px solid var(--line);
-      padding: 9px 10px;
-      background: var(--bg-soft);
-    }}
-    details {{
-      border: 1px solid var(--line);
-      padding: 10px;
-      background: #fff;
-      margin-top: 12px;
-    }}
-    summary {{
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--link);
-    }}
-    .text-block {{
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      margin-top: 14px;
-      color: var(--ink);
-      font-size: 0.9rem;
-      max-height: 380px;
-      overflow: auto;
-    }}
-    .notice {{
-      margin-top: 30px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.96rem;
-    }}
-    footer {{ margin-top: 22px; color: var(--muted); font-size: 0.94rem; }}
-    @media (max-width: 860px) {{
-      main {{ width: min(calc(100% - 24px), var(--max)); padding-top: 24px; }}
-      h1 {{ font-size: 1.85rem; }}
-      .reader {{ grid-template-columns: 1fr; }}
-      .side {{ position: static; }}
-      .viewer {{ height: 72vh; min-height: 520px; }}
-    }}
-  </style>
   <script type="application/ld+json">{{"@context":"https://schema.org","@graph":[{{"@type":"WebPage","@id":"https://bamsucks.com/{slug}/#webpage","url":"https://bamsucks.com/{slug}/","name":{json_name},"description":{json_desc},"isPartOf":{{"@id":"https://bamsucks.com/#website"}},"breadcrumb":{{"@id":"https://bamsucks.com/{slug}/#breadcrumb"}},"primaryEntity":{{"@id":"https://bamsucks.com/{slug}/#document"}},"image":"/previews/{slug}-page-1.png","inLanguage":"en-US","dateModified":"2026-06-10"}},{{"@type":"DigitalDocument","@id":"https://bamsucks.com/{slug}/#document","name":{json_name},"description":{json_desc},"url":"https://bamsucks.com/{slug}/","encodingFormat":"text/html","isBasedOn":"https://bamsucks.com/{pdf_name}","image":"/previews/{slug}-page-1.png","about":[{{"@type":"Thing","name":"Bricks and Minifigs dispute"}},{{"@type":"Thing","name":"Utah court filing"}}],"mentions":[{{"@type":"Person","name":"Benjamin Paul Schneider / Reckless Ben"}}],"inLanguage":"en-US","dateModified":"2026-06-10"}},{{"@type":"BreadcrumbList","@id":"https://bamsucks.com/{slug}/#breadcrumb","itemListElement":[{{"@type":"ListItem","position":1,"name":"Home","item":"https://bamsucks.com/"}},{{"@type":"ListItem","position":2,"name":{json_name},"item":"https://bamsucks.com/{slug}/"}}]}}]}}</script>
 </head>
 <body>
@@ -416,13 +271,14 @@ def main() -> None:
     print(catalog_li)
 
     print("\n=== REMINDERS ===")
-    print(f"1. Manually create the preview PNG: {PREVIEWS / preview_name}")
-    print("2. Edit archive.js → add to GROUP_DATA['case-260402353'].items :")
+    print(f"1. Manually create the preview PNG: {PREVIEWS / preview_name} (named to match the slug)")
+    print("2. Edit archive.js → add to the appropriate GROUP_DATA (e.g. case-260402353).items so the page gets automatic prev/next group navigation injected by archive.js:")
     print(f"   {{num: \"{args.sub}\", slug: \"{args.slug}\", title: \"{args.title}\"}},")
-    print("3. Edit sitemap.xml → add <url> for /" + args.slug + "/ (with <image:image>) and /" + dest_pdf_name)
-    print("4. (After pasting the <li> into index.html) run:  python _build_topic_pages.py")
+    print("3. Edit sitemap.xml → add <url> for the reader /" + args.slug + "/ (and the PDF). Include <image:image> once the preview PNG exists.")
+    print("4. (After pasting the <li> into index.html) run:  python _build_topic_pages.py to refresh topic hubs.")
     print("5. Fill the TODO markers in the new reader (lede paragraph, text-block excerpt, any extra sidebar p).")
-    print("6. Test locally with serve-current.bat (or python -m http.server 8080 from the source dir).")
+    print("6. All common reader CSS now lives in /document.css (the generator links it; old pages with duplicated inline <style> still work but can be slimmed to the global + tiny page-specific overrides).")
+    print("7. Test locally with serve-current.bat (or python -m http.server 8080 from the source dir).")
     print("\nDone. The script performed no mutations to index.html, archive.js, or sitemap.xml.")
 
 if __name__ == "__main__":
