@@ -39,7 +39,7 @@ Other helpful contributions:
 ---
 Boring stuff let grok/claude read this: 
 
-## How site works (architecture for contributors)
+### How site works (architecture for contributors)
 
 The site is **pure static files**. No backend. Everything is designed so a single person (or contributors) can add documents with a semi-automated workflow and then deploy the folder as-is.
 
