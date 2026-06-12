@@ -50,10 +50,10 @@ TOPICS = [
     },
     {
         "slug": "legally-mine",
-        "title": "Ammon McNeff / Legally Mine federal case | McNeff v. McNeff and Legally Mine records",
-        "description": "Federal court filings from McNeff v. McNeff (2:21-cv-00048-DAO) and Legally Mine LLC Utah UCC filings and Ohio Supreme Court order enjoining unauthorized practice of law (Case 2025-0037).",
-        "h1": "Ammon McNeff / Legally Mine federal case",
-        "lede": "Public records for Legally Mine LLC (Utah UCC summary and detailed financing filings, plus the Ohio Supreme Court consent decree in Ohio State Bar Association v. Legally Mine) and the related Ammon McNeff / Legally Mine federal case in the District of Utah (2:21-cv-00048-DAO): civil cover sheets, complaint with exhibits A through F, order to propose schedule, and plaintiffs' notice of voluntary dismissal.",
+        "title": "Ammon McNeff / Legally Mine",
+        "description": "Everything related to Ammon McNeff and Legally Mine, including the federal case McNeff v. McNeff (2:21-cv-00048-DAO) and Legally Mine LLC records (Utah UCC filings and Ohio bar order).",
+        "h1": "Ammon McNeff / Legally Mine",
+        "lede": "Everything related to Ammon McNeff and Legally Mine: the federal court case McNeff v. McNeff plus Legally Mine LLC Utah UCC filings and the Ohio Supreme Court order.",
         "keywords": "Ammon McNeff, Legally Mine LLC, Daniel McNeff, McNeff v McNeff, Legally Mine federal case, unauthorized practice of law, Ohio bar order, Utah UCC, District of Utah, PACER, 2:21-cv-00048",
         "extract": {"item_ids": [
             "utah-ucc-legally-mine-summary-item",
