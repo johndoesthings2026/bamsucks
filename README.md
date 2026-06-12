@@ -27,7 +27,7 @@ Other helpful contributions:
 - make sure just to max for seo and update the sitemap
 
 Not allowed: 
-- Letting a llm to generate node js slop
+- Letting a llm generate node js slop
 - opinions
 
 ![Ammon](ammon.png)
