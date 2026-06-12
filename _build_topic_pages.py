@@ -35,14 +35,14 @@ UTAH_COMPLAINT_CONTEXT = (
 )
 
 NAV = [
-    ("bricks-minifigs-franchise-documents", "Franchise"),
+    ("bricks-minifigs-franchise-documents", "Franchise FDD"),
     ("legally-mine", "Legally Mine"),
-    ("bricks-minifigs-financing-records", "Financing"),
-    ("ammon-mcneff-federal-case", "McNeff federal"),
+    ("bricks-minifigs-financing-records", "Financing records"),
+    ("ammon-mcneff-federal-case", "Ammon McNeff federal"),
     ("chrystal-law-bricks-minifigs", "Chrystal Law"),
-    ("american-fork-police-reckless-ben", "Police"),
-    ("reckless-ben-utah-lawsuit", "Utah lawsuit"),
-    ("reckless-ben-small-claims", "Small claims"),
+    ("american-fork-police-reckless-ben", "AFPD & Reckless Ben"),
+    ("reckless-ben-utah-lawsuit", "Reckless Ben Utah lawsuit"),
+    ("reckless-ben-small-claims", "Reckless Ben small claims"),
     ("reckless-ben-case-261000376", "Case 261000376"),
 ]
 
