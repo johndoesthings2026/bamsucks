@@ -43,7 +43,7 @@ NAV = [
     ("american-fork-police-reckless-ben", "AFPD & Reckless Ben"),
     ("reckless-ben-utah-lawsuit", "Reckless Ben Utah lawsuit"),
     ("reckless-ben-small-claims", "Reckless Ben small claims"),
-    ("reckless-ben-case-261000376", "Case 261000376"),
+    ("reckless-ben-case-261000376", "Provo Case"),
 ]
 
 TOPICS = [

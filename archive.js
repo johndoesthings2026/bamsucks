@@ -59,7 +59,7 @@
       ["5", "AFPD & Reckless Ben"],
       ["6", "Reckless Ben Utah lawsuit"],
       ["7", "Reckless Ben small claims"],
-      ["8", "Reckless Ben Case 261000376"],
+      ["8", "Provo Case"],
     ]);
 
     const caseLabels = new Map([
