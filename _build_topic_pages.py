@@ -117,11 +117,11 @@ TOPICS = [
     },
     {
         "slug": "reckless-ben-case-261000376",
-        "title": "Reckless Ben Utah Case 261000376 Court Documents",
-        "description": "Utah Case No. 261000376 court documents involving Reckless Ben (Benjamin Schneider). Separate case records including the docket events list, Information and Indictment, and Advisement of Rights form from the Bricks and Minifigs dispute.",
-        "h1": "Reckless Ben Utah Case 261000376 court documents",
-        "lede": "Public court documents from Utah Case No. 261000376 involving YouTuber Reckless Ben (Benjamin Paul Schneider). This separate case includes the docket events list, the Information and Indictment, and the Advisement of Rights form.",
-        "keywords": "Reckless Ben 261000376, Benjamin Schneider 261000376, Utah Case 261000376, docket events, Information and Indictment, Advisement of Rights, Bricks and Minifigs, Reckless Ben court records",
+        "title": "Reckless Ben Provo Misdemeanor Case 261000376",
+        "description": "Reckless Ben Provo Misdemeanor Case 261000376 court documents involving Reckless Ben (Benjamin Schneider). Separate case records including the docket events list, Information and Indictment, and Advisement of Rights form from the Bricks and Minifigs dispute.",
+        "h1": "Reckless Ben Provo Misdemeanor Case 261000376",
+        "lede": "Public court documents from the Reckless Ben Provo Misdemeanor Case 261000376 involving YouTuber Reckless Ben (Benjamin Paul Schneider). This separate case includes the docket events list, the Information and Indictment, and the Advisement of Rights form.",
+        "keywords": "Reckless Ben 261000376, Benjamin Schneider 261000376, Provo Misdemeanor Case 261000376, docket events, Information and Indictment, Advisement of Rights, Bricks and Minifigs, Reckless Ben court records",
         "extract": {"group": "8"},
     },
     {
