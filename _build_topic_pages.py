@@ -11,13 +11,6 @@ ROOT = Path(__file__).resolve().parent
 INDEX = ROOT / "index.html"
 TOPICS_DIR = ROOT / "topics"
 
-SITE_CONTEXT = (
-    "The Bricks and Minifigs situation is a sprawling national controversy involving BAM Franchising, Inc., "
-    "a former franchise owner in Salem and Keizer, Oregon, and a high-profile viral investigative documentary "
-    'by YouTuber "Reckless Ben" (Benjamin Schneider). The scandal centers on allegations surrounding the handling '
-    "and eventual loss of a massive, privately owned LEGO Star Wars collection valued between $60,000 and $200,000."
-)
-
 SMALL_CLAIMS_CONTEXT = (
     'YouTuber Benjamin Paul Schneider ("Reckless Ben") and the Mansell family successfully won '
     "a series of small claims court lawsuits in Oregon against the Keizer/Salem franchise of "
@@ -349,7 +342,6 @@ def build_page(topic: dict, subdocs_html: str) -> str:
 
     <header>
       <h1>{html.escape(topic["h1"])}</h1>
-      <p class="topic-context">{html.escape(SITE_CONTEXT)}</p>
 {extra_context_html}      <p class="lede">{html.escape(topic["lede"])}</p>
       <p class="topic-keywords"><strong>Related searches:</strong> {html.escape(topic["keywords"])}</p>
     </header>
@@ -417,7 +409,6 @@ def build_topics_index() -> str:
   <main>
     <nav class="top-links"><a href="/" data-go-back-home>← Go back home</a></nav>
     <h1>Archive topics</h1>
-    <p class="topic-context">{html.escape(SITE_CONTEXT)}</p>
     <p class="lede">Topic landing pages for franchise documents, Legally Mine and financing records, federal and state court filings, American Fork Police Department records, the Reckless Ben Utah lawsuit, and Oregon small claims involving Benjamin Schneider.</p>
     <ul class="topic-list">
 {cards_html}
