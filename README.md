@@ -1,8 +1,6 @@
 # Bricks and Minifigs Sucks — Public Archive
 
-**Super neutral public archive of court records, police reports, franchise documents, and related public filings from the Bricks and Minifigs / BAM Franchising disputes involving Reckless Ben (Benjamin Schneider) and others.**
-
-> **Important disclaimer**: if you are Ammon Mcneff don't sue me please
+>if you are Ammon Mcneff don't sue me please
 
 ## Do you want to contribute?
 
@@ -28,17 +26,18 @@ Other helpful contributions:
 - Documentation improvements.
 
 ### Quick SEO & sitemap checklist for new documents
-- [ ] Reader page title + meta description contain strong keywords (case #, parties, document type)
-- [ ] Preview PNG generated and referenced
-- [ ] Entry added to `archive.js` GROUP_DATA (for intra-group prev/next)
-- [ ] Catalog `<li>` pasted into the correct group in `index.html`
-- [ ] `sitemap.xml` updated (reader + PDF + image:image where applicable)
-- [ ] `python _build_topic_pages.py` re-run
-- [ ] `python add_document.py --check` passes for the new item
-- [ ] Test the page and the group navigation
+- Reader page title + meta description contain strong keywords (case #, parties, document type)
+- Preview PNG generated and referenced
+-Entry added to `archive.js` GROUP_DATA (for intra-group prev/next)
+-Catalog `<li>` pasted into the correct group in `index.html`
+-`sitemap.xml` updated (reader + PDF + image:image where applicable)
+- `python _build_topic_pages.py` re-run
+- `python add_document.py --check` passes for the new item
+-  Test the page and the group navigation
 
-This keeps the archive consistent, well-indexed, and easy for others to navigate.
 
+---
+Boring stuff let grok/claude read this: 
 
 ## How site works (architecture for contributors)
 
