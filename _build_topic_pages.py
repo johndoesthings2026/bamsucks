@@ -50,15 +50,26 @@ TOPICS = [
     },
     {
         "slug": "legally-mine",
-        "title": "Legally Mine Records | Utah UCC & Ohio Bar Order",
-        "description": "Legally Mine LLC Utah UCC financing filings, detailed UCC records, and Ohio Supreme Court order enjoining Legally Mine and Daniel McNeff from unauthorized practice of law (Case 2025-0037).",
-        "h1": "Legally Mine records",
-        "lede": "Public records for Legally Mine LLC: Utah UCC summary and detailed financing filings, plus the Ohio Supreme Court consent decree in Ohio State Bar Association v. Legally Mine enjoining unauthorized practice of law by Legally Mine and Daniel McNeff.",
-        "keywords": "Legally Mine LLC, Daniel McNeff, Ammon McNeff, unauthorized practice of law, Ohio bar order, Utah UCC, asset protection",
-        "extract": {"group": "2", "item_ids": [
+        "title": "Ammon McNeff / Legally Mine federal case | McNeff v. McNeff and Legally Mine records",
+        "description": "Federal court filings from McNeff v. McNeff (2:21-cv-00048-DAO) and Legally Mine LLC Utah UCC filings and Ohio Supreme Court order enjoining unauthorized practice of law (Case 2025-0037).",
+        "h1": "Ammon McNeff / Legally Mine federal case",
+        "lede": "Public records for Legally Mine LLC (Utah UCC summary and detailed financing filings, plus the Ohio Supreme Court consent decree in Ohio State Bar Association v. Legally Mine) and the related Ammon McNeff / Legally Mine federal case in the District of Utah (2:21-cv-00048-DAO): civil cover sheets, complaint with exhibits A through F, order to propose schedule, and plaintiffs' notice of voluntary dismissal.",
+        "keywords": "Ammon McNeff, Legally Mine LLC, Daniel McNeff, McNeff v McNeff, Legally Mine federal case, unauthorized practice of law, Ohio bar order, Utah UCC, District of Utah, PACER, 2:21-cv-00048",
+        "extract": {"item_ids": [
             "utah-ucc-legally-mine-summary-item",
             "utah-ucc-legally-mine-detail-item",
             "legally-mine-ohio-upl-order-2025-0037-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-1-civil-cover-sheet-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-complaint-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-1-civil-cover-sheet-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-2-exhibit-a-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-3-exhibit-b-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-4-exhibit-c-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-5-exhibit-d-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-6-exhibit-e-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-2-7-exhibit-f-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-3-order-to-propose-schedule-item",
+            "mcneff-v-mcneff-2-21-cv-00048-doc-12-filing-item",
         ]},
     },
     {
@@ -73,15 +84,7 @@ TOPICS = [
             "utah-ucc-bam-franchising-detail-item",
         ]},
     },
-    {
-        "slug": "ammon-mcneff-federal-case",
-        "title": "Ammon McNeff Federal Case | McNeff v. McNeff 2:21-cv-00048",
-        "description": "Federal court filings from McNeff v. McNeff, U.S. District Court for the District of Utah Case No. 2:21-cv-00048-DAO — complaint, exhibits A–F, scheduling order, and voluntary dismissal involving Ammon McNeff, Matthew McNeff, Daniel McNeff, and Legally Mine.",
-        "h1": "Ammon McNeff / Legally Mine federal case",
-        "lede": "District of Utah federal docket in McNeff v. McNeff (2:21-cv-00048-DAO): civil cover sheets, complaint with exhibits A through F, order to propose schedule, and plaintiffs' notice of voluntary dismissal connected to the Legally Mine dispute.",
-        "keywords": "Ammon McNeff, Matthew McNeff, Daniel McNeff, McNeff v McNeff, Legally Mine federal case, District of Utah, PACER, 2:21-cv-00048",
-        "extract": {"group": "3"},
-    },
+
     {
         "slug": "chrystal-law-bricks-minifigs",
         "title": "Chrystal Law Bricks and Minifigs Lawsuit | Case 260200029",
@@ -430,10 +433,19 @@ def main() -> None:
     group_cache: dict[str, str] = {}
 
     for topic in TOPICS:
-        group = topic["extract"]["group"]
-        if group not in group_cache:
-            group_cache[group] = extract_group(html_text, group)
-        subdocs = extract_subdocs(group_cache[group], topic)
+        spec = topic["extract"]
+        if "group" in spec:
+            group = spec["group"]
+            if group not in group_cache:
+                group_cache[group] = extract_group(html_text, group)
+            group_html = group_cache[group]
+        else:
+            # merged topics like legally-mine + ammon-mcneff: collect html from relevant groups
+            for g in ["2", "3"]:
+                if g not in group_cache:
+                    group_cache[g] = extract_group(html_text, g)
+            group_html = group_cache["2"] + "\n" + group_cache["3"]
+        subdocs = extract_subdocs(group_html, topic)
         subdocs = enrich_subdocs(subdocs, topic.get("doc_insertions"))
         page = build_page(topic, subdocs)
         out_dir = TOPICS_DIR / topic["slug"]
