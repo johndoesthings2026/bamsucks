@@ -47,7 +47,7 @@ READER_TEMPLATE = """<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title} | Notice</title>
+  <title>{title}</title>
   <meta name="description" content="{description}">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
   <meta name="theme-color" content="#ffffff">
