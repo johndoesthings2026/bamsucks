@@ -1,18 +1,30 @@
-﻿# Ignore Python caches and Cloudflare wrangler temp
+# Python caches
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Local dev / temp (not part of the published site)
 .wrangler/
 *.log
 .DS_Store
 Thumbs.db
+*.bat
 
-# Recovery / local-only artifacts (do not deploy to CF)
+# Pure recovery / historical artifacts from the "recovered" process
+# These are not needed for the public source or for contributors to build the site.
 cloudflare_metadata/
 current-site-source/
 historical-homepages/
 recovered_site/
-*.bat
-_build_topic_pages.py
-add_document.py
-generate_new_previews.py
+
+# The build tooling below IS useful for contributors who want to add new documents.
+# They are intentionally kept in the repo (unlike the old "local-only" policy for CF deploys).
+# See README for how to use them.
+# (If you really want to exclude them from the published static output, handle that at deploy time.)
+# _build_topic_pages.py
+# add_document.py
+# generate_new_previews.py
+# audit_readers.ps1
+
+# (The lines above are commented so the tools stay in the source tree for GitHub contributors.
+# Uncomment them only if you want to go back to the old "tools are local-only" model.)

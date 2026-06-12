@@ -289,7 +289,7 @@
           <button id="unblock-button" type="button" disabled>Reveal Email</button>
         </div>
 
-        <p class="disclaimer">This runs a real <a href="https://en.wikipedia.org/wiki/Proof_of_work" target="_blank" rel="noopener noreferrer">proof-of-work (POW)</a> check in your browser to stop bots from scraping my email. Just press start to begin the POW, to get my email-address. It may take a while.</p>
+        <p class="disclaimer">This runs a real <a href="https://en.wikipedia.org/wiki/Proof_of_work" target="_blank" rel="noopener noreferrer">proof-of-work (POW)</a> check in your browser to stop bots from scraping my email. Just press start to begin the POW, to get my email-address. It runs locally and finishes almost instantly.</p>
         <div id="pow-container" class="pow-holder" aria-live="polite"></div>
       </form>
 
@@ -304,12 +304,13 @@
     // It is not inserted into the DOM until the PoW callback succeeds.
     const CONTACT_EMAIL_BYTES = [108, 117, 108, 117, 99, 97, 110, 116, 64, 99, 111, 99, 107, 46, 108, 105];
 
-    // Intentionally hard bot-deterrence setting. Each +1 roughly doubles average solve time.
-    // Lower this if real humans report the page is taking too long or cooking laptops.
-    const POW_DIFFICULTY_LEVEL = 22;
+    // Made even less difficult (user request for near-instant solve).
+    // Original was 22 (hard). Dropped to 8 bits + very light Scrypt N=1024.
+    // Each +1 in difficulty roughly doubles work. This should solve in <1-2s on most devices.
+    const POW_DIFFICULTY_LEVEL = 8;
 
-    // Library default is 4096. 8192 makes each Scrypt attempt heavier.
-    const POW_BOT_DETERRENT_SCRYPT_CPU_AND_MEMORY_COST = 8192;
+    // Very light Scrypt cost now (was 4096). Makes every hash attempt fast.
+    const POW_BOT_DETERRENT_SCRYPT_CPU_AND_MEMORY_COST = 1024;
 
     const powStatus = document.getElementById("pow-status");
     const startMiningButton = document.getElementById("start-mining");

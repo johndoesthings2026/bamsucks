@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import re
 import shutil
 import textwrap
 from pathlib import Path
@@ -154,26 +155,88 @@ def main() -> None:
     p = argparse.ArgumentParser(
         description="Scaffold a new document entry for the bamsucks archive (group 6 / Utah case by default)."
     )
-    p.add_argument("--source", required=True, help="Path to the raw PDF in Downloads/utah (or elsewhere)")
-    p.add_argument("--slug", required=True, help="Kebab-case slug for folder + URLs (e.g. bricks-minifigs-v-reckless-ben-exhibit-j-notice-trespass)")
-    p.add_argument("--title", required=True, help="Human title for h1 / catalog (e.g. Exhibit J - Notice of Trespass, Harassment, and Prohibition)")
-    p.add_argument("--sub", required=True, help="Sub-number in group, e.g. 6H")
-    p.add_argument("--date", required=True, help="Document date string for facts (e.g. 2025-12 (filed 2026-05-28) or June 02, 2026)")
-    p.add_argument("--pages", required=True, help="Page count string (e.g. 6 or 24)")
-    p.add_argument("--type", dest="doc_type", required=True, help="Document type for facts sidebar (e.g. Exhibit - Notice of Trespass (letter))")
-    p.add_argument("--doc-source", dest="doc_source", required=True, help="Source string for facts (e.g. Fourth Judicial District Court... or BAM Franchising...)")
-    p.add_argument("--people", required=True, help="People/entities string for facts")
-    p.add_argument("--desc", required=True, help="Short catalog description (also used for lede starter and meta). Case number will be emphasized for SEO.")
+    p.add_argument("--source", required=False, help="Path to the raw PDF in Downloads/utah (or elsewhere). Not required for --check or when --pdf-name points to an already-present root PDF.")
+    p.add_argument("--slug", required=False, help="Kebab-case slug for folder + URLs (e.g. bricks-minifigs-v-reckless-ben-exhibit-j-notice-trespass)")
+    p.add_argument("--title", required=False, help="Human title for h1 / catalog (e.g. Exhibit J - Notice of Trespass, Harassment, and Prohibition)")
+    p.add_argument("--sub", required=False, help="Sub-number in group, e.g. 6H")
+    p.add_argument("--date", required=False, help="Document date string for facts (e.g. 2025-12 (filed 2026-05-28) or June 02, 2026)")
+    p.add_argument("--pages", required=False, help="Page count string (e.g. 6 or 24)")
+    p.add_argument("--type", dest="doc_type", required=False, help="Document type for facts sidebar (e.g. Exhibit - Notice of Trespass (letter))")
+    p.add_argument("--doc-source", dest="doc_source", required=False, help="Source string for facts (e.g. Fourth Judicial District Court... or BAM Franchising...)")
+    p.add_argument("--people", required=False, help="People/entities string for facts")
+    p.add_argument("--desc", required=False, help="Short catalog description (also used for lede starter and meta). Case number will be emphasized for SEO.")
     p.add_argument("--pdf-name", dest="pdf_name", default=None, help="Exact root PDF filename to use in links/iframe (e.g. the clean name already copied to the source dir). If omitted, a name is derived.")
     p.add_argument("--dry-run", action="store_true", help="Print actions and snippets but do not copy files or create dirs")
     p.add_argument("--target-dir", default=str(ROOT), help="Override target current-site-source root (for testing)")
+    p.add_argument("--check", action="store_true", help="Audit/check mode: scan homepage listings for group 6 document slugs and report any that are missing their reader folder/index.html (prevents partial setups like missed exhibits)")
 
     args = p.parse_args()
 
+    if args.check:
+        target_root = Path(args.target_dir).resolve()
+        index_html = target_root / "index.html"
+        if not index_html.exists():
+            print("ERROR: index.html not found for --check")
+            return
+        content = index_html.read_text(encoding="utf-8", errors="ignore")
+        # Broad scan for reader page slugs across ALL groups (Utah bricks, McNeff federal, etc.).
+        # Looks for "Read page" links or direct /slug/ hrefs that look like document readers (not raw .pdf).
+        # This catches partial setups where listings/GROUP_DATA/sitemap exist but the actual index.html is missing.
+        slugs = re.findall(r'href=["\']?/(bricks-minifigs-v-reckless-ben-[^/"\'>]+|mcneff-v-mcneff-[^/"\'>]+|[a-z0-9-]+-exhibit-[a-z]+|[a-z0-9-]*cover-sheet[^/"\'>]*)/["\']?', content, re.IGNORECASE)
+        # Also scan near "Read page" text for robustness
+        read_page_context = re.findall(r'Read page[^<]*<a[^>]*href=["\']?/( [^/"\'>]+ )', content, re.IGNORECASE)
+        slugs += [m.strip() for m in read_page_context if m.strip()]
+        slugs = sorted(set([s for s in slugs if s and not s.endswith('.pdf') and '/' not in s]))
+        print("=== bamsucks --check: verifying reader pages + previews for listed documents (all groups) ===")
+        missing_reader = []
+        missing_preview = []
+        for slug in slugs:
+            reader = target_root / slug / "index.html"
+            preview = PREVIEWS / f"{slug}-page-1.png"   # PREVIEWS defined at top
+            if not reader.exists():
+                missing_reader.append(slug)
+                print(f"MISSING READER: {slug}/index.html  (listed in homepage/topics or GROUP_DATA but no reader page)")
+            else:
+                print(f"OK READER: {slug}/index.html")
+            if not preview.exists():
+                missing_preview.append(slug)
+                print(f"  MISSING PREVIEW: previews/{slug}-page-1.png  (sidebar/details image will 404; run generate_new_previews.py)")
+            else:
+                print(f"  OK PREVIEW: previews/{slug}-page-1.png")
+        if missing_reader or missing_preview:
+            print(f"\n{len(missing_reader)} missing reader page(s), {len(missing_preview)} missing preview(s).")
+            print("Use add_document.py to scaffold missing readers.")
+            print("Run: python generate_new_previews.py   (it now auto-handles McNeff + is easy to extend).")
+            print("This makes it scalable and easy to check that NOTHING is broken for all pages.")
+        else:
+            print("\nAll listed documents have corresponding reader pages AND previews. Perfect. Nothing broken.")
+        return
+
+    if not args.check:
+        required_fields = ['slug', 'title', 'sub', 'date', 'pages', 'doc_type', 'doc_source', 'people', 'desc']
+        missing = [f for f in required_fields if not getattr(args, f)]
+        if missing:
+            p.error("the following arguments are required: " + ", ".join("--" + f.replace("_", "-") for f in missing) + " (use --check for audit mode without them)")
+
     target_root = Path(args.target_dir).resolve()
-    source = Path(args.source).expanduser().resolve()
-    if not source.exists():
-        p.error(f"Source not found: {source}")
+
+    source = None
+    if args.source:
+        source = Path(args.source).expanduser().resolve()
+        if not source.exists():
+            p.error(f"Source not found: {source}")
+    elif not args.dry_run and not args.check:
+        # Allow pure scaffold if PDF already at root via --pdf-name (useful for backfilling missed exhibits)
+        if args.pdf_name:
+            candidate = target_root / args.pdf_name
+            if candidate.exists():
+                print(f"Note: no --source provided; PDF already present at root ({candidate.name}). Scaffolding reader HTML only.")
+            else:
+                p.error("--source is required (or provide --pdf-name for a PDF that already exists in the target root)")
+        else:
+            p.error("--source is required")
+
+    target_root = Path(args.target_dir).resolve()
 
     # SEO: always emphasize the case number that people search for
     case_label = "Utah Case No. 260402353"
@@ -216,8 +279,11 @@ def main() -> None:
         if dest_pdf.exists():
             print(f"WARNING: {dest_pdf} already exists — not overwriting (using existing for references).")
         else:
-            shutil.copy2(source, dest_pdf)
-            print(f"Copied PDF -> {dest_pdf}")
+            if source:
+                shutil.copy2(source, dest_pdf)
+                print(f"Copied PDF -> {dest_pdf}")
+            else:
+                print(f"Using existing PDF at root (no copy): {dest_pdf}")
         # Write scaffold reader
         reader_path = slug_dir / "index.html"
         facts_html = f"""        <div class="fact"><span>Document type</span>{html.escape(args.doc_type)}</div>
@@ -279,6 +345,7 @@ def main() -> None:
     print("5. Fill the TODO markers in the new reader (lede paragraph, text-block excerpt, any extra sidebar p).")
     print("6. All common reader CSS now lives in /document.css (the generator links it; old pages with duplicated inline <style> still work but can be slimmed to the global + tiny page-specific overrides).")
     print("7. Test locally with serve-current.bat (or python -m http.server 8080 from the source dir).")
+    print("8. Run `python add_document.py --check` any time to audit that every document listed in the homepage (group 6 etc.) has a corresponding reader page. This is the main safeguard against partial setups (listings + previews updated but reader HTML/folder missing).")
     print("\nDone. The script performed no mutations to index.html, archive.js, or sitemap.xml.")
 
 if __name__ == "__main__":
