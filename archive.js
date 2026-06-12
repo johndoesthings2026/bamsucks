@@ -587,7 +587,8 @@
         items: [
           {num: "8A", slug: "reckless-ben-utah-case-261000376-docket-events", title: "Provo Misdemeanor Case 261000376 Docket Events | Reckless Ben"},
           {num: "8B", slug: "reckless-ben-utah-case-261000376-information-and-indictment", title: "Information and Indictment | Provo Misdemeanor Case 261000376 Reckless Ben"},
-          {num: "8C", slug: "reckless-ben-utah-case-261000376-advisement-of-rights", title: "Advisement of Rights, Enhancement, and Right to Counsel | Provo Misdemeanor Case 261000376 Reckless Ben"}
+          {num: "8C", slug: "reckless-ben-utah-case-261000376-advisement-of-rights", title: "Advisement of Rights, Enhancement, and Right to Counsel | Provo Misdemeanor Case 261000376 Reckless Ben"},
+          {num: "8D", slug: "reckless-ben-provo-misdemeanor-case-261000376-pretrial-protective-order", title: "Pretrial Protective Order - Benjamin Paul Schneider (Case 261000376)"}
         ]
       }
     };
