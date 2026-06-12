@@ -43,6 +43,7 @@ NAV = [
     ("american-fork-police-reckless-ben", "Police"),
     ("reckless-ben-utah-lawsuit", "Utah lawsuit"),
     ("reckless-ben-small-claims", "Small claims"),
+    ("reckless-ben-case-261000376", "Case 261000376"),
 ]
 
 TOPICS = [
@@ -118,6 +119,15 @@ TOPICS = [
         "doc_insertions": {
             "verified-complaint": UTAH_COMPLAINT_CONTEXT,
         },
+    },
+    {
+        "slug": "reckless-ben-case-261000376",
+        "title": "Reckless Ben Utah Case 261000376 Court Documents",
+        "description": "Utah Case No. 261000376 court documents involving Reckless Ben (Benjamin Schneider). Separate case records including the docket events list, Information and Indictment, and Advisement of Rights form from the Bricks and Minifigs dispute.",
+        "h1": "Reckless Ben Utah Case 261000376 court documents",
+        "lede": "Public court documents from Utah Case No. 261000376 involving YouTuber Reckless Ben (Benjamin Paul Schneider). This separate case includes the docket events list, the Information and Indictment, and the Advisement of Rights form.",
+        "keywords": "Reckless Ben 261000376, Benjamin Schneider 261000376, Utah Case 261000376, docket events, Information and Indictment, Advisement of Rights, Bricks and Minifigs, Reckless Ben court records",
+        "extract": {"group": "8"},
     },
     {
         "slug": "reckless-ben-small-claims",
@@ -360,7 +370,7 @@ def build_page(topic: dict, subdocs_html: str) -> str:
     </section>
 
     <footer>
-      <p>Part of the <a href="/">Bricks and Minifigs dispute archive</a>. Last updated <time datetime="2026-06-10">June 10, 2026</time>.</p>
+      <p>Part of the <a href="/">Bricks and Minifigs dispute archive</a>. Last updated <time datetime="2026-06-12">June 12, 2026</time>.</p>
       <p><a href="/sitemap.xml">Sitemap</a> · <a href="/robots.txt">Robots</a></p>
     </footer>
   </main>
@@ -413,7 +423,7 @@ def build_topics_index() -> str:
 {cards_html}
     </ul>
     <footer>
-      <p>Last updated <time datetime="2026-06-10">June 10, 2026</time>. <a href="/sitemap.xml">Sitemap</a></p>
+      <p>Last updated <time datetime="2026-06-12">June 12, 2026</time>. <a href="/sitemap.xml">Sitemap</a></p>
     </footer>
   </main>
 </body>

@@ -59,6 +59,7 @@
       ["5", "AFPD & Reckless Ben"],
       ["6", "Reckless Ben Utah lawsuit"],
       ["7", "Reckless Ben small claims"],
+      ["8", "Reckless Ben Case 261000376"],
     ]);
 
     const caseLabels = new Map([
@@ -578,6 +579,15 @@
           {num: "7.C.13", slug: "oregon-small-claims-26sc06134-notice-hearing-mediation-n2n-mar-174691866", title: "26SC06134 - Notice - Hearing Mediation N2N-MAR"},
           {num: "7.C.14", slug: "oregon-small-claims-26sc06134-notice-hearing-mediation-n2n-mar-174691867", title: "26SC06134 - Notice - Hearing Mediation N2N-MAR"},
           {num: "7.C.15", slug: "oregon-small-claims-26sc06134-small-claim-response-173126684", title: "26SC06134 - Small Claim Response"}
+        ]
+      },
+      "case-261000376": {
+        num: "8",
+        title: "Reckless Ben Utah Case 261000376 filings",
+        items: [
+          {num: "8A", slug: "reckless-ben-utah-case-261000376-docket-events", title: "Utah Case 261000376 Docket Events | Reckless Ben"},
+          {num: "8B", slug: "reckless-ben-utah-case-261000376-information-and-indictment", title: "Information and Indictment | Utah Case 261000376 Reckless Ben"},
+          {num: "8C", slug: "reckless-ben-utah-case-261000376-advisement-of-rights", title: "Advisement of Rights, Enhancement, and Right to Counsel | Utah Case 261000376 Reckless Ben"}
         ]
       }
     };

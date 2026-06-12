@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://bamsucks.com/</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://bamsucks.com/topics/</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.94</priority>
   </url>
@@ -1141,5 +1141,53 @@
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
+  </url>
+  <url>
+    <loc>https://bamsucks.com/reckless-ben-utah-case-261000376-docket-events/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://bamsucks.com/previews/reckless-ben-utah-case-261000376-docket-events-page-1.png</image:loc>
+      <image:title>Utah Case 261000376 Docket Events first page preview (Reckless Ben)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://bamsucks.com/Reckless-Ben-Utah-Case-261000376-Docket-Events.pdf</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://bamsucks.com/reckless-ben-utah-case-261000376-information-and-indictment/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://bamsucks.com/previews/reckless-ben-utah-case-261000376-information-and-indictment-page-1.png</image:loc>
+      <image:title>Information and Indictment - Utah Case 261000376 Reckless Ben first page preview</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://bamsucks.com/Reckless-Ben-Utah-Case-261000376-Information-and-Indictment.pdf</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://bamsucks.com/reckless-ben-utah-case-261000376-advisement-of-rights/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://bamsucks.com/previews/reckless-ben-utah-case-261000376-advisement-of-rights-page-1.png</image:loc>
+      <image:title>Advisement of Rights - Utah Case 261000376 Reckless Ben first page preview</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://bamsucks.com/Reckless-Ben-Utah-Case-261000376-Advisement-of-Rights.pdf</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
 </urlset>
