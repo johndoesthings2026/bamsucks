@@ -29,9 +29,8 @@ UTAH_COMPLAINT_CONTEXT = (
 
 NAV = [
     ("bricks-minifigs-franchise-documents", "Franchise FDD"),
-    ("legally-mine", "Legally Mine"),
+    ("legally-mine", "Ammon McNeff / Legally Mine"),
     ("bricks-minifigs-financing-records", "Financing records"),
-    ("ammon-mcneff-federal-case", "Ammon McNeff federal"),
     ("chrystal-law-bricks-minifigs", "Chrystal Law"),
     ("american-fork-police-reckless-ben", "AFPD & Reckless Ben"),
     ("reckless-ben-utah-lawsuit", "Reckless Ben Utah lawsuit"),
@@ -242,8 +241,12 @@ def extract_subdocs(group_html: str, body: str) -> str:
 
 def build_nav(current_slug: str) -> str:
     parts = []
+    current = current_slug.split("/")[0]
     for slug, label in NAV:
-        cls = ' class="is-current"' if slug == current_slug.split("/")[0] else ""
+        is_current = slug == current
+        if slug == "legally-mine" and current in ("legally-mine", "ammon-mcneff-federal-case"):
+            is_current = True
+        cls = ' class="is-current"' if is_current else ""
         parts.append(f'<a href="/topics/{slug}/"{cls}>{html.escape(label)}</a>')
     return "\n      ".join(parts)
 
