@@ -6,7 +6,7 @@
 
 If you want to upload a legal/police/exhibit document follow this:
 
-1. Use `python add_document.py ...` (see the detailed usage comment at the top of the file) to scaffold everything.
+1. Use `python add_document.py ...`  to scaffold everything.
 2. Follow the reminders the script prints. (This will remind you to add the item to `archive.js` GROUP_DATA so Previous/Next navigation works automatically on the new reader page.)
 3. Run `python add_document.py --check` and `python generate_new_previews.py`.
 4. **Edit `sitemap.xml`**: Add `<url>` entries for the new reader page (`/<your-slug>/`) **and** for the PDF file itself. Once the preview PNG exists, also add an `<image:image>` element inside the reader page's `<url>`.  
@@ -24,5 +24,6 @@ Other helpful contributions:
 - Adding more topic context, related links, or cross-references between cases.
 - Improving the Python generators or adding tests for `--check`.
 - Documentation improvements.
+- make sure just to max for seo and update the sitemap
 
 ![Ammon](ammon.png)
